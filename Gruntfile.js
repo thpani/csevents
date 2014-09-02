@@ -494,7 +494,8 @@ module.exports = function (grunt) {
             '{app,components}/**/*.jade'
           ],
           dest: '.tmp',
-          ext: '.html'
+          ext: '.html',
+          extDot: 'last'
         }]
       }
     },
