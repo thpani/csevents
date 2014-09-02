@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 var EventSchema = new Schema({
   title: String,
-  date_begin: Date,
-  date_end: Date
+  date_from: Date,
+  date_to: Date
 });
 
 module.exports = mongoose.model('Event', EventSchema);
