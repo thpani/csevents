@@ -1,0 +1,22 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  ui-view
+
+    p
+      button.btn.btn-default(type="button" ui-sref="events.new")
+        span.glyphicon.glyphicon-plus
+        | &nbsp; Add new event
+
+    ul.list-group
+
+      li.list-group-item(ng-repeat='event in events')
+        strong {{event.title}}
+        br
+        span.text-muted {{ event.date_from | myDate }} <em>to</em>
+        br
+        span.text-muted {{ event.date_to | myDate }}
+        a.trash(ng-click='delete(event)')
+          span.glyphicon.glyphicon-trash.pull-right
+      
+      li.list-group-item(ng-if='events.length == 0')
+        strong Sorry, no events for you :(

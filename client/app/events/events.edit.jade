@@ -1,0 +1,27 @@
+mixin datepicker(label, model)
+    label.col-sm-2.control-label= label
+    .col-sm-4
+      .dropdown
+        a.dropdown-toggle(data-toggle="dropdown")
+          .input-group
+            input.form-control(type="text" value="{{ " + model + " | myDate }}" readonly)
+            .input-group-addon
+              i.glyphicon.glyphicon-calendar
+        ul.dropdown-menu
+          datetimepicker(ng-model=model)
+
+
+h1 Add new event
+form.form-horizontal
+  .form-group
+    label.col-sm-2.control-label Title
+    .col-sm-10
+      input.form-control(type="text" placeholder="Title" ng-model="event.title")
+
+  .form-group
+    +datepicker('From', 'event.date_from')
+    +datepicker('To', 'event.date_to')
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      button.btn.btn-default(type="submit" ng-click="submit()") Add event
