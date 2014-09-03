@@ -5,8 +5,7 @@ angular.module 'cseventsApp'
   $scope.event = if $stateParams.id? then Event.get(id: $stateParams.id) else new Event
 
   $scope.submit = () ->
-    newEvent = new Event $scope.event
-    newEvent.$save(
+    $scope.event.$save(
       -> $state.go('events'),
       (httpResponse) -> console.log(httpResponse) # TODO
     )
