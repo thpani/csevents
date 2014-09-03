@@ -25,6 +25,8 @@ mixin datepicker(label, model)
 h1 Add new event
 form.form-horizontal
   +textinput('Title', 'event.title')
+  +textinput('Speaker', 'event.speaker')
+  +textinput('Speaker Homepage', 'event.speaker_url', 'http://institution.edu/~speaker/')
 
   .form-group
     +datepicker('From', 'event.date_from')

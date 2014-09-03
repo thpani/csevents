@@ -5,6 +5,8 @@ var mongoose = require('mongoose'),
 
 var EventSchema = new Schema({
   title: String,
+  speaker: String,
+  speaker_url: String,
   date_from: Date,
   date_to: Date
 });

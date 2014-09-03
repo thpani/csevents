@@ -10,12 +10,26 @@ div(ng-include='"components/navbar/navbar.html"')
     ul.list-group
 
       li.list-group-item(ng-repeat='event in events')
-        strong {{event.title}}
-        br
+        .row
+          .col-sm-8
+            p
+              span.lead
+                strong {{ event.title }}
+              |  by 
+              span.lead
+                strong {{ event.speaker }} 
+              a(href="{{ event.speaker_url }}" ng-show="event.speaker_url")
+                i.glyphicon.glyphicon-home
+            dl.dl-horizontal
+              dt starts
+              dd {{ event.date_from | myDate }}
+              dt ends
+              dd {{ event.date_to | myDate }}
+            br
         span.text-muted {{ event.date_from | myDate }} <em>to</em>
         br
         span.text-muted {{ event.date_to | myDate }}
-        a.trash(ng-click='delete(event)')
+            a.trash(ng-click='delete(event)')
           span.glyphicon.glyphicon-trash.pull-right
       
       li.list-group-item(ng-if='events.length == 0')
