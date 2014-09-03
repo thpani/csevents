@@ -32,6 +32,30 @@ angular.module 'cseventsApp', [
 
     $q.reject response
 
+# Let $save() track if the object is new (POST) or updated (PUT).
+# We do this by looking at the `_id' field from mongodb.
+#
+# Source:
+# http://kirkbushell.me/angular-js-using-ng-resource-in-a-more-restful-manner/
+# Also see the comments on `apply'!
+.factory 'Resource', ($resource) ->
+  (url, params, methods) ->
+    defaults =
+      update: { method: 'PUT', isArray: false }
+      create: { method: 'POST' }
+
+    methods = angular.extend defaults, methods
+
+    resource = $resource url, params, methods
+
+    resource.prototype.$save = ->
+      if not this._id?
+        return this.$create.apply(this, arguments)
+      else
+        return this.$update.apply(this, arguments)
+
+    return resource
+
 .run ($rootScope, $location, Auth) ->
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$stateChangeStart', (event, next) ->

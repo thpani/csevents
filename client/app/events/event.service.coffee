@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'cseventsApp'
-.factory 'Event', ($resource) ->
+.factory 'Event', (Resource) ->
 
-  $resource '/api/events/:id/:controller',
+  Resource '/api/events/:id',
     id: '@_id'
