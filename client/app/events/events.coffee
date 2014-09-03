@@ -15,3 +15,9 @@ angular.module 'cseventsApp'
     templateUrl: 'app/events/events.edit.html'
     controller: 'EventCtrl'
     authenticate: true
+
+  .state 'events.edit',
+    url: '/edit/:id'
+    templateUrl: 'app/events/events.edit.html'
+    controller: 'EventCtrl'
+    authenticate: true

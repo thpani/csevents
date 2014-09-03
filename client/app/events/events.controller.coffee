@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'cseventsApp'
-.controller 'EventsCtrl', ($scope, Event, socket) ->
+.controller 'EventsCtrl', ($scope, $state, Event, socket) ->
   $scope.events = Event.query()
 
   # sync updates
@@ -10,3 +10,5 @@ angular.module 'cseventsApp'
 
   $scope.delete = (event) ->
     Event.delete(id: event._id)
+
+  $scope.edit = (event) -> $state.go('events.edit', id: event._id)
