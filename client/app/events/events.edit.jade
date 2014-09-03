@@ -1,10 +1,21 @@
+mixin formelement(label)
+  .form-group
+    label.col-sm-2.control-label= label
+    .col-sm-10
+      block
+
+mixin textinput(label, model, placeholder)
+  - placeholder = placeholder || label
+  +formelement(label)
+    input.form-control(type="text" placeholder=placeholder ng-model=model)
+
 mixin datepicker(label, model)
     label.col-sm-2.control-label= label
     .col-sm-4
       .dropdown
         a.dropdown-toggle(data-toggle="dropdown")
           .input-group
-            input.form-control(type="text" value="{{ " + model + " | myDate }}" readonly)
+          input.form-control(type="text" placeholder=label value="{{ " + model + " | myDate }}" readonly)
             .input-group-addon
               i.glyphicon.glyphicon-calendar
         ul.dropdown-menu
@@ -13,10 +24,7 @@ mixin datepicker(label, model)
 
 h1 Add new event
 form.form-horizontal
-  .form-group
-    label.col-sm-2.control-label Title
-    .col-sm-10
-      input.form-control(type="text" placeholder="Title" ng-model="event.title")
+  +textinput('Title', 'event.title')
 
   .form-group
     +datepicker('From', 'event.date_from')
