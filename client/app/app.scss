@@ -20,6 +20,14 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     background-color: transparent;
 }
 
+.form-group .help-block {
+  display: none;
+}
+
+.form-group.has-error .help-block {
+  display: block;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';

@@ -7,6 +7,8 @@ angular.module 'cseventsApp'
 
   $scope.submit = () ->
     $scope.form.$submitted = "submitted"
+    return if $scope.form.$invalid
+
     su = $scope.event.speaker_url
     if su? and not _.contains(su, '//')
       $scope.event.speaker_url = 'http://'+su

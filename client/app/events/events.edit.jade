@@ -1,36 +1,48 @@
-mixin formelement(label)
-  .form-group
+mixin formelement(label, model)
+  .form-group(ng-class="{'has-error': form.$submitted && form['"+model+"'].$invalid, 'has-success': form.$submitted && form['"+model+"'].$valid}")
     label.col-sm-2.control-label= label
     .col-sm-10
       block
 
 mixin textinput(label, model, placeholder)
   - placeholder = placeholder || label
-  +formelement(label)
-    input.form-control(type="text" placeholder=placeholder ng-model=model)
+  +formelement(label, model)
+    case required
+      when 1
+        input.form-control(type="text" name=model placeholder=placeholder ng-model=model required)
+        .help-block #{label} is required.
+      default
+        input.form-control(type="text" name=model placeholder=placeholder ng-model=model)
 
 mixin datepicker(label, model)
-    label.col-sm-2.control-label= label
-    .col-sm-4
-      .dropdown
-        a.dropdown-toggle(data-toggle="dropdown")
-          .input-group
+  label.col-sm-2.control-label= label
+  .col-sm-4
+    .dropdown
+      a.dropdown-toggle(data-toggle="dropdown")
+        .input-group
           input.form-control(type="text" placeholder=label value="{{ " + model + " | myDate }}" readonly)
-            .input-group-addon
-              i.glyphicon.glyphicon-calendar
-        ul.dropdown-menu
-          datetimepicker(ng-model=model)
+          .input-group-addon
+            i.glyphicon.glyphicon-calendar
+      ul.dropdown-menu
+        datetimepicker(ng-model=model)
 
 
-form.form-horizontal
 h1 {{action}} event
+form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form.$submitted}" novalidate)
+
+  - required = 1
   +textinput('Title', 'event.title')
+
+  - required = 0
   +textinput('Speaker', 'event.speaker')
-  +textinput('Speaker Homepage', 'event.speaker_url', 'http://institution.edu/~speaker/')
+  +textinput('Homepage', 'event.speaker_url', 'http://institution.edu/~speaker/')
 
   .form-group
     +datepicker('From', 'event.date_from')
     +datepicker('To', 'event.date_to')
+
+  +formelement('Photo')
+    input(type="file" ng-file-select="onFileSelect($files)" accept="image/*")
 
   .form-group
     .col-sm-offset-2.col-sm-10
