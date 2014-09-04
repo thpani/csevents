@@ -1,5 +1,9 @@
-mixin formelement(label, model)
+mixin formgroup(model)
   .form-group(ng-class="{'has-error': form.$submitted && form['"+model+"'].$invalid, 'has-success': form.$submitted && form['"+model+"'].$valid}")
+    block
+
+mixin formelement(label, model)
+  +formgroup(model)
     label.col-sm-2.control-label= label
     .col-sm-10
       block
@@ -10,11 +14,12 @@ mixin textinput(label, model, placeholder)
     case required
       when 1
         input.form-control(type="text" name=model placeholder=placeholder ng-model=model required)
-        .help-block #{label} is required.
+        .help-block(ng-show="form.$submitted && form['"+model+"'].$error.required") #{label} is required.
       default
         input.form-control(type="text" name=model placeholder=placeholder ng-model=model)
 
 mixin datepicker(label, model)
+  +formgroup(model)
   label.col-sm-2.control-label= label
   .col-sm-4
     .dropdown
@@ -23,6 +28,7 @@ mixin datepicker(label, model)
           input.form-control(type="text" placeholder=label value="{{ " + model + " | myDate }}" readonly)
           .input-group-addon
             i.glyphicon.glyphicon-calendar
+        .help-block(ng-show="form.$submitted && form['"+model+"'].$error.required") #{label} is required.
       ul.dropdown-menu
         datetimepicker(ng-model=model)
 
@@ -37,7 +43,6 @@ form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form
   +textinput('Speaker', 'event.speaker')
   +textinput('Homepage', 'event.speaker_url', 'http://institution.edu/~speaker/')
 
-  .form-group
     +datepicker('From', 'event.date_from')
     +datepicker('To', 'event.date_to')
 
