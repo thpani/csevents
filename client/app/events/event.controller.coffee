@@ -6,6 +6,7 @@ angular.module 'cseventsApp'
   $scope.action = if $stateParams.id? then "Edit" else "Add new"
 
   $scope.submit = () ->
+    $scope.form.$submitted = "submitted"
     su = $scope.event.speaker_url
     if su? and not _.contains(su, '//')
       $scope.event.speaker_url = 'http://'+su
