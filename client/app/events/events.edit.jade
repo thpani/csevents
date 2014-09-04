@@ -22,8 +22,8 @@ mixin datepicker(label, model)
           datetimepicker(ng-model=model)
 
 
-h1 Add new event
 form.form-horizontal
+h1 {{action}} event
   +textinput('Title', 'event.title')
   +textinput('Speaker', 'event.speaker')
   +textinput('Speaker Homepage', 'event.speaker_url', 'http://institution.edu/~speaker/')
@@ -34,4 +34,4 @@ form.form-horizontal
 
   .form-group
     .col-sm-offset-2.col-sm-10
-      button.btn.btn-default(type="submit" ng-click="submit()") Add event
+      button.btn.btn-default(type="submit") {{action}} event
