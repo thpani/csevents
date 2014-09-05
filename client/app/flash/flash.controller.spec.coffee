@@ -13,5 +13,6 @@ describe 'Controller: FlashCtrl', ->
     FlashCtrl = $controller 'FlashCtrl',
       $scope: scope
 
-  it 'should ...', ->
-    expect(1).toEqual 1
+  it 'hosts the flash service', ->
+    expect(scope.flash).toBeDefined()
+    expect(scope.flash.getMessages()).toEqual []
