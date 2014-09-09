@@ -11,7 +11,7 @@ angular.module 'cseventsApp'
 
     su = $scope.event.speaker_url
     if su? and not _.contains(su, '//')
-      $scope.event.speaker_url = 'http://'+su
+      $scope.event.speaker_url = "http://#{su}"
 
     $scope.event.$save(
       -> $state.go('events'),
