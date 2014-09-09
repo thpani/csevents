@@ -58,7 +58,7 @@ describe 'Controller: EventCtrl in edit mode', ->
 
   it 'does not change state on save fail', ->
     expect(stateServiceMock.go).not.toHaveBeenCalled()
-    spyOn(scope.event, '$save').andCallFake((success, fail) -> fail())
+    spyOn(scope.event, '$save').andCallFake((success, fail) -> fail(data: {}))
     scope.submit()
     expect(stateServiceMock.go).not.toHaveBeenCalled()
 
