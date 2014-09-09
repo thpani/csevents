@@ -13,7 +13,7 @@ describe 'Controller: EventseriesEditCtrl in new mode', ->
   flashServiceMock = undefined
 
   # Initialize the controller and a mock scope
-  beforeEach inject ($controller, $rootScope, Flash) ->
+  beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     scope.form = {}
 
@@ -32,7 +32,6 @@ describe 'Controller: EventseriesEditCtrl in new mode', ->
       $state: stateServiceMock
       $stateParams: stateParamsMock
       EventSeries: eventSeriesServiceMock
-      Flash: Flash
 
   it 'creates new EventSeries', ->
     expect(scope.event).toBeDefined()
