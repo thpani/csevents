@@ -62,6 +62,12 @@ describe 'Controller: EventCtrl in edit mode', ->
     scope.submit()
     expect(stateServiceMock.go).not.toHaveBeenCalled()
 
+  it 'flashes message on save fail', inject (Flash) ->
+    expect(Flash.getMessages().length).toEqual 0
+    spyOn(scope.event, '$save').andCallFake((success, fail) -> fail(data: {}))
+    scope.submit()
+    expect(Flash.getMessages().length).toEqual 1
+
   it 'prepends protocol to non-URLs', ->
     expect(scope.event.speaker_url).toBeUndefined()
     scope.submit()
