@@ -4,7 +4,7 @@ angular.module 'cseventsApp'
 .config ($stateProvider) ->
   $stateProvider.state 'eventseries',
     url: '/eventseries'
-    templateUrl: 'app/eventseries/eventseries.html'
+    templateUrl: 'app/eventseries/index.html'
     controller: 'EventseriesCtrl'
     authenticate: true
 
