@@ -1,0 +1,27 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  ui-view
+
+    p
+      button.btn.btn-default(type="button" ui-sref="eventseries.new")
+        span.glyphicon.glyphicon-plus
+        |  Add new event series
+
+    ul.list-group
+
+      li.list-group-item(ng-repeat='event in eventseries')
+        .row
+          .col-sm-11
+            p
+              span.lead
+                strong {{ event.name }}
+            p {{ event.info }}
+          .col-sm-1
+            a(ng-click='edit(event)')
+              span.glyphicon.glyphicon-pencil
+            br
+            a.trash(ng-click='delete(event)')
+              span.glyphicon.glyphicon-trash
+      
+      li.list-group-item(ng-if='eventseries.length == 0')
+        strong Sorry, no event series for you :(
