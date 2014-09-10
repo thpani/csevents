@@ -6,14 +6,12 @@ var request = require('supertest');
 
 describe('GET /api/eventseries', function() {
 
-  it('should respond with JSON array', function(done) {
+  it('should respond with 401 Unauthorized', function(done) {
     request(app)
       .get('/api/eventseries')
-      .expect(200)
-      .expect('Content-Type', /json/)
+      .expect(401)
       .end(function(err, res) {
         if (err) return done(err);
-        res.body.should.be.instanceof(Array);
         done();
       });
   });
