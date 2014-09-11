@@ -40,9 +40,19 @@ angular.module 'cseventsApp', [
 # Also see the comments on `apply'!
 .factory 'Resource', ($resource) ->
   (url, params, methods) ->
+
+    # http://coffeescriptcookbook.com/chapters/arrays/check-type-is-array
+    typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
+
+    saveTransform = (data, headersGetter) ->
+      _.forOwn data, (propVal, propName, object) ->
+        if typeIsArray(propVal) and _.all(propVal, (item) -> item._id?)
+          object[propName] = _.pluck propVal, '_id'
+      angular.toJson data
+
     defaults =
-      update: { method: 'PUT', isArray: false }
-      create: { method: 'POST' }
+      update: { method: 'PUT', isArray: false, transformRequest: saveTransform }
+      create: { method: 'POST', transformRequest: saveTransform }
 
     methods = angular.extend defaults, methods
 

@@ -1,7 +1,8 @@
 'use strict'
 
 angular.module 'cseventsApp'
-.controller 'EventCtrl', ($scope, $state, $stateParams, Event, Flash) ->
+.controller 'EventCtrl', ($scope, $state, $stateParams, Event, EventSeries, Flash) ->
+  $scope.eventseries = EventSeries.query()
   $scope.event = if $stateParams.id? then Event.get(id: $stateParams.id) else new Event
   $scope.action = if $stateParams.id? then "Edit" else "Add new"
 

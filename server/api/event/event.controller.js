@@ -5,7 +5,7 @@ var Event = require('./event.model');
 
 // Get list of events
 exports.index = function(req, res) {
-  Event.find(function (err, events) {
+  Event.find().populate('series').exec(function (err, events) {
     if(err) { return handleError(res, err); }
     return res.json(200, events);
   });
@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 
 // Get a single event
 exports.show = function(req, res) {
-  Event.findById(req.params.id, function (err, event) {
+  Event.findById(req.params.id).populate('series').exec(function (err, event) {
     if(err) { return handleError(res, err); }
     if(!event) { return res.send(404); }
     return res.json(event);
@@ -34,7 +34,7 @@ exports.update = function(req, res) {
   Event.findById(req.params.id, function (err, event) {
     if (err) { return handleError(res, err); }
     if(!event) { return res.send(404); }
-    var updated = _.merge(event, req.body);
+    var updated = _.extend(event, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, event);
