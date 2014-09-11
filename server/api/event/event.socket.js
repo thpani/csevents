@@ -8,7 +8,9 @@ var Event = require('./event.model');
 
 exports.register = function(socket) {
   Event.schema.post('save', function (doc) {
+    doc.populate('series', function(err, doc) {
     onSave(socket, doc);
+  });
   });
   Event.schema.post('remove', function (doc) {
     onRemove(socket, doc);
