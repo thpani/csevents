@@ -25,6 +25,11 @@ div(ng-include='"components/navbar/navbar.html"')
               dd {{ event.date_from | myDate }}
               dt ends
               dd {{ event.date_to | myDate }}
+              dt series
+              dd
+                span(ng-repeat='series in event.series')
+                  a(ui-sref="eventseries.edit({ id: series._id })").label.label-default {{ series.name }}
+                  = ' '
           .col-sm-1
             a(ng-click='edit(event)')
               span.glyphicon.glyphicon-pencil

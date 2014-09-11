@@ -28,6 +28,9 @@ form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form
   +datepicker('From', 'event.date_from')
   +datepicker('To', 'event.date_to')
 
+  +formelement('Event series', 'event.series')
+    select.form-control(ng-model="event.series" ng-options="series.name for series in eventseries track by series._id" multiple)
+
   .form-group
     .col-sm-offset-2.col-sm-10
       button.btn.btn-default(type="submit") {{action}} event
