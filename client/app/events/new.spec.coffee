@@ -10,6 +10,7 @@ describe 'Controller: EventCtrl in new mode', ->
   stateServiceMock = undefined
   stateParamsMock = undefined
   eventServiceMock = undefined
+  eventSeriesServiceMock = undefined
 
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
@@ -25,16 +26,22 @@ describe 'Controller: EventCtrl in new mode', ->
       _id: evt.id
       $save: -> _id: evt.id
     eventServiceMock.prototype.$save = -> _id: this.id
+    eventSeriesServiceMock =
+      query: -> []
 
     EventCtrl = $controller 'EventCtrl',
       $scope: scope
       $state: stateServiceMock
       $stateParams: stateParamsMock
       Event: eventServiceMock
+      EventSeries: eventSeriesServiceMock
 
   it 'creates new event', ->
     expect(scope.event).toBeDefined()
     expect(scope.event._id).toBeUndefined()
+
+  it 'queries EventSeries', ->
+    expect(scope.eventseries).toEqual []
 
   it 'sets action string', ->
     expect(scope.action).toEqual 'Add new'
