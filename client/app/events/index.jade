@@ -15,7 +15,7 @@ div(ng-include='"components/navbar/navbar.html"')
             p
               span.lead
                 strong {{ event.title }}
-              |  by 
+              span(ng-show="event.speaker")= ' by '
               span.lead
                 strong {{ event.speaker }} 
               a(href="{{ event.speaker_url }}" ng-show="event.speaker_url")
