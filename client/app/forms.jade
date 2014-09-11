@@ -1,0 +1,19 @@
+mixin formgroup(model)
+  .form-group(ng-class="{'has-error': form.$submitted && form['"+model+"'].$invalid, 'has-success': form.$submitted && form['"+model+"'].$valid}")
+    block
+
+mixin formelement(label, model)
+  +formgroup(model)
+    label.col-sm-2.control-label= label
+    .col-sm-10
+      block
+
+mixin textinput(label, model, placeholder)
+  - placeholder = placeholder || label
+  +formelement(label, model)
+    case required
+      when 1
+        input.form-control(type="text" name=model placeholder=placeholder ng-model=model required)
+        .help-block(ng-show="form.$submitted && form['"+model+"'].$error.required") #{label} is required.
+      default
+        input.form-control(type="text" name=model placeholder=placeholder ng-model=model)
