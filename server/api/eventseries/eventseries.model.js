@@ -8,4 +8,4 @@ var EventseriesSchema = new Schema({
   info: String
 });
 
-module.exports = mongoose.model('Eventseries', EventseriesSchema);
+module.exports = mongoose.model('EventSeries', EventseriesSchema);

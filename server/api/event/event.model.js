@@ -8,7 +8,8 @@ var EventSchema = new Schema({
   speaker: String,
   speaker_url: String,
   date_from: Date,
-  date_to: Date
+  date_to: Date,
+  series: [{ type: Schema.Types.ObjectId, ref: 'EventSeries' }]
 });
 
 module.exports = mongoose.model('Event', EventSchema);
