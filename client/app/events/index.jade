@@ -28,7 +28,7 @@ div(ng-include='"components/navbar/navbar.html"')
               dt series
               dd
                 span(ng-repeat='series in event.series')
-                  a(ui-sref="eventseries.edit({ id: series._id })").label.label-default {{ series.name }}
+                  a.label.label-default(ui-sref="eventseries.edit({ id: series._id })") {{ series.name }}
                   = ' '
           .col-sm-1
             a(ng-click='edit(event)')
