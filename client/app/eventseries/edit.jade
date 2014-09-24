@@ -9,6 +9,10 @@ form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form
   - required = 0
   +textinput('Info', 'event.info')
 
+  +formelement('Public Address')
+    a.label.label-default(target="_self" href="/api/calendars/{{ event.cal_pub_id }}") ICAL
+    .help-block This is the address for your calendar. Everybody who knows the URL can access the calendar.
+
   .form-group
     .col-sm-offset-2.col-sm-10
       button.btn.btn-default(type="submit") {{action}} event
