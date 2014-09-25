@@ -5,19 +5,27 @@ var Eventseries = require('./eventseries.model');
 
 // Get list of eventseriess
 exports.index = function(req, res) {
-  Eventseries.find(function (err, eventseriess) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, eventseriess);
-  });
+  Eventseries
+    .find()
+    .populate('u_admins')
+    .populate('u_editors')
+    .exec(function (err, eventseriess) {
+      if(err) { return handleError(res, err); }
+      return res.json(200, eventseriess);
+    });
 };
 
 // Get a single eventseries
 exports.show = function(req, res) {
-  Eventseries.findById(req.params.id, function (err, eventseries) {
-    if(err) { return handleError(res, err); }
-    if(!eventseries) { return res.send(404); }
-    return res.json(eventseries);
-  });
+  Eventseries
+    .findById(req.params.id)
+    .populate('u_admins')
+    .populate('u_editors')
+    .exec(function (err, eventseries) {
+      if(err) { return handleError(res, err); }
+      if(!eventseries) { return res.send(404); }
+      return res.json(eventseries);
+    });
 };
 
 // Creates a new eventseries in the DB.
