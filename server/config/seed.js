@@ -27,10 +27,14 @@ User.find({}).remove(function() {
     EventSeries.find({}).remove(function() {
       EventSeries.create({
         name: 'RiSE Seminar',
-        info: 'Seminar for Rigorous Systems Engineering'
+        info: 'Seminar for Rigorous Systems Engineering',
+        u_admins: [ u_admin._id ],
+        u_editors: [ u_test._id ]
       }, {
         name: 'VCLA Lecture Series',
-        info: 'Seminar of the Vienna Center for Logic and Algorithms'
+        info: 'Seminar of the Vienna Center for Logic and Algorithms',
+        u_admins: [ u_admin._id ],
+        u_editors: [ u_test._id ]
       }, function(err, series_rise, series_vcla) {
         console.log('finished populating event series');
 
