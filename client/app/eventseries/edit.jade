@@ -25,14 +25,14 @@ form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form
 
   +formelement('Editors')
     +usertable('event.u_editors')
-    button.btn.btn-xs.btn-default
+    a.btn.btn-xs.btn-default(ng-click="addUser()")
       span.glyphicon.glyphicon-plus
       |  Invite new editor
     .help-block Editors are allowed to add and remove events to this event series, and edit events associated with it.
 
   +formelement('Admins')
     +usertable('event.u_admins')
-    button.btn.btn-xs.btn-default
+    a.btn.btn-xs.btn-default(ng-click="addUser()")
       span.glyphicon.glyphicon-plus
       |  Invite new admin
     .help-block Admins are allowed to change every aspect of this event series.
@@ -44,3 +44,13 @@ form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form
   .form-group
     .col-sm-offset-2.col-sm-10
       button.btn.btn-default(type="submit") {{action}} event
+
+script(type="text/ng-template" id="EventSeriesUserModal.html")
+  .modal-header
+    h3.modal-title Invite a user
+  .modal-body
+    form.form-horizontal(name="form" ng-submit="ok()")
+      +textinput('Email', 'invitation.email')
+  .modal-footer
+    button.btn.btn-primary(ng-click="ok()") OK
+    button.btn.btn-primary(ng-click="cancel()") Cancel

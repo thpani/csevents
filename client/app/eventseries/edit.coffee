@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'cseventsApp'
-.controller 'EventseriesEditCtrl', ($scope, $state, $stateParams, EventSeries, Flash) ->
+.controller 'EventseriesEditCtrl', ($scope, $state, $stateParams, $modal, EventSeries, Flash) ->
   $scope.event = if $stateParams.id? then EventSeries.get(id: $stateParams.id) else new EventSeries
   $scope.action = if $stateParams.id? then "Edit" else "Add new"
 
@@ -17,3 +17,14 @@ angular.module 'cseventsApp'
         else
           Flash.error "Server returned #{resp.status} #{resp.statusText}. #{resp.data.message}."
     )
+
+  $scope.addUser = () ->
+    modalInstance = $modal.open
+      templateUrl: 'EventSeriesUserModal.html'
+      controller: 'EventSeriesUserModalCtrl'
+
+.controller 'EventSeriesUserModalCtrl', ($scope, $modalInstance) ->
+  $scope.invitation = {}
+  $scope.ok = ->
+    $modalInstance.close()
+  $scope.cancel = -> $modalInstance.dismiss()
