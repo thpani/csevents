@@ -21,35 +21,33 @@ User.find({}).remove(function() {
     name: 'Admin',
     email: 'admin@admin.com',
     password: 'admin'
-  }, function() {
-      console.log('finished populating users');
-  });
-});
+  }, function(err, u_test, u_admin) {
+    console.log('finished populating users');
 
-EventSeries.find({}).remove(function() {
-  EventSeries.create({
-    name: 'RiSE Seminar',
-    info: 'Seminar for Rigorous Systems Engineering'
-  }, {
-    name: 'VCLA Lecture Series',
-    info: 'Seminar of the Vienna Center for Logic and Algorithms'
-  }, function() {
-    console.log('finished populating event series');
+    EventSeries.find({}).remove(function() {
+      EventSeries.create({
+        name: 'RiSE Seminar',
+        info: 'Seminar for Rigorous Systems Engineering'
+      }, {
+        name: 'VCLA Lecture Series',
+        info: 'Seminar of the Vienna Center for Logic and Algorithms'
+      }, function(err, series_rise, series_vcla) {
+        console.log('finished populating event series');
 
-    Event.find({}).remove(function() {
-      EventSeries.find({}, '_id', function(err, ids) {
-        Event.create({
-          title: 'Loop Patterns in C Programs',
-          speaker: 'Thomas Pani',
-          date_from: '2014-09-03T16:00:00.000Z',
-          date_to: '2014-09-03T17:00:00.000Z',
-          series: ids.map(function(id) {return id._id; })
-        }, function(err) {
-          if (err) throw err;
-          console.log('finished populating events');
+        Event.find({}).remove(function() {
+          Event.create({
+            title: 'Loop Patterns in C Programs',
+            speaker: 'Thomas Pani',
+            date_from: '2014-09-03T16:00:00.000Z',
+            date_to: '2014-09-03T17:00:00.000Z',
+            series: [ series_rise._id, series_vcla._id ]
+          }, function(err) {
+            if (err) throw err;
+            console.log('finished populating events');
+          });
         });
+
       });
     });
-
   });
 });
