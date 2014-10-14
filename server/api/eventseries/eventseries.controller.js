@@ -7,8 +7,7 @@ var Eventseries = require('./eventseries.model');
 exports.index = function(req, res) {
   Eventseries
     .find()
-    .populate('u_admins')
-    .populate('u_editors')
+    .populate('u_admins u_editors')
     .exec(function (err, eventseriess) {
       if(err) { return handleError(res, err); }
       return res.json(200, eventseriess);
@@ -19,8 +18,7 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Eventseries
     .findById(req.params.id)
-    .populate('u_admins')
-    .populate('u_editors')
+    .populate('u_admins u_editors')
     .exec(function (err, eventseries) {
       if(err) { return handleError(res, err); }
       if(!eventseries) { return res.send(404); }

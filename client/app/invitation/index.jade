@@ -1,0 +1,19 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  ui-view
+
+    .jumbotron(ng-show="eventseries")
+      h1 Congratulations!
+      p You are now admin of the event series 
+        a(ui-sref='eventseries.edit({ id: eventseries._id })') {{ eventseries.name }}
+      p
+        a.btn.btn-primary.btn-lg(ui-sref='eventseries.edit({ id: eventseries._id })') Visit the event series
+
+    .jumbotron(ng-show="fail")
+      h1 Sorry!
+      p
+        | We failed to process your invitation.
+        br
+        | Please ask the event series admin to invite you again.
+      p
+        a.btn.btn-warning.btn-lg(href='/') Go back
