@@ -1,14 +1,14 @@
 include ../forms.jade
 
-mixin usertable(model)
+mixin usertable
   table.table.table-condensed
     thead
       th User
       th Status
       th Remove
-    tr(ng-repeat='user in '+model)
+    tr(ng-repeat='user in event.u_admins')
       td {{ user.name }}
-      td ✓ current member
+      td <i class="fa fa-user"></i> member
       td
         a.trash
           span.glyphicon.glyphicon-trash
@@ -23,19 +23,13 @@ form.form-horizontal(name="form" ng-submit="submit()" ng-class="{submitted: form
   - required = 0
   +textinput('Info', 'event.info')
 
-  +formelement('Editors')
-    +usertable('event.u_editors')
-    a.btn.btn-xs.btn-default(ng-click="addUser()")
-      span.glyphicon.glyphicon-plus
-      |  Invite new editor
-    .help-block Editors are allowed to add and remove events to this event series, and edit events associated with it.
-
-  +formelement('Admins')
-    +usertable('event.u_admins')
-    a.btn.btn-xs.btn-default(ng-click="addUser()")
-      span.glyphicon.glyphicon-plus
-      |  Invite new admin
-    .help-block Admins are allowed to change every aspect of this event series.
+  div(ng-show="event._id")
+    +formelement('Admins')
+      +usertable
+      a.btn.btn-xs.btn-default(ng-click="addUser()")
+        span.glyphicon.glyphicon-plus
+        |  Invite new admin
+      .help-block Admins are allowed to change every aspect of this event series.
 
   +formelement('Public Address')
     a.label.label-default(target="_self" href="/api/calendars/{{ event.cal_pub_id }}") ICAL

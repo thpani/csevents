@@ -22,9 +22,16 @@ angular.module 'cseventsApp'
     modalInstance = $modal.open
       templateUrl: 'EventSeriesUserModal.html'
       controller: 'EventSeriesUserModalCtrl'
+      resolve:
+        eventseries: () -> $scope.event._id
 
-.controller 'EventSeriesUserModalCtrl', ($scope, $modalInstance) ->
-  $scope.invitation = {}
+.controller 'EventSeriesUserModalCtrl', ($scope, $modalInstance, Invitation, Flash, eventseries) ->
+  $scope.invitation = new Invitation
+  $scope.invitation.eventseries = eventseries
   $scope.ok = ->
+    $scope.invitation.$save(
+      -> Flash.success "#{$scope.invitation.email} has been invited as admin.",
+      (resp) -> Flash.error "Server returned #{resp.status} #{resp.statusText}. #{resp.data.message}."
+    )
     $modalInstance.close()
   $scope.cancel = -> $modalInstance.dismiss()
