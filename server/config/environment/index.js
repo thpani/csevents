@@ -57,6 +57,13 @@ var all = {
     clientID:     process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',
     callbackURL:  process.env.DOMAIN || '' + '/auth/google/callback'
+  },
+
+  email: {
+    service: 'Mandrill',
+    user: process.env.MANDRILL_ID,
+    pass: process.env.MANDRILL_SECRET,
+    from: 'CSEvents <hello@csevents.thpani.net>',
   }
 };
 
