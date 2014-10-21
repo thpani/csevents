@@ -14,12 +14,12 @@ div(ng-include='"components/navbar/navbar.html"')
           .col-sm-11
             p
               span.lead
-                strong {{ event.name }}
+                strong {{ event.name }} 
               a(ui-sref="eventseries.detail({ id: event._id })")
                 i.fa.fa-calendar
             p {{ event.info }}
           .col-sm-1
-            a(ng-click='edit(event)')
+            a(ui-sref='eventseries.edit({ id: event._id })')
               span.glyphicon.glyphicon-pencil
             br
             a.trash(ng-click='delete(event)')
