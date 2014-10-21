@@ -15,6 +15,8 @@ div(ng-include='"components/navbar/navbar.html"')
             p
               span.lead
                 strong {{ event.name }}
+              a(ui-sref="eventseries.detail({ id: event._id })")
+                i.fa.fa-calendar
             p {{ event.info }}
           .col-sm-1
             a(ng-click='edit(event)')
