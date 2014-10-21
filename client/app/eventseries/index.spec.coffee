@@ -40,7 +40,3 @@ describe 'Controller: EventseriesCtrl', ->
   it 'calls EventSeries on delete', ->
     scope.delete(_id: 'abc')
     expect(eventSeriesServiceMock.delete).toHaveBeenCalledWith(id: 'abc')
-
-  it 'changes state on edit', ->
-    scope.edit(_id: 'abc')
-    expect(stateMock.go).toHaveBeenCalledWith('eventseries.edit', id: 'abc')

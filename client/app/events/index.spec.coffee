@@ -41,7 +41,3 @@ describe 'Controller: EventsCtrl', ->
   it 'calls Event on delete', ->
     scope.delete(_id: 'abc')
     expect(eventServiceMock.delete).toHaveBeenCalledWith(id: 'abc')
-
-  it 'changes state on edit', ->
-    scope.edit(_id: 'abc')
-    expect(stateMock.go).toHaveBeenCalledWith('events.edit', id: 'abc')
