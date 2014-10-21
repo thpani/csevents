@@ -40,6 +40,12 @@ User.find({}).remove(function() {
 
         Event.find({}).remove(function() {
           Event.create({
+            title: 'Gmurx',
+            speaker: 'Musterspeaker',
+            date_from: '2014-09-03T16:00:00.000Z',
+            date_to: '2014-09-03T17:00:00.000Z',
+            series: [ series_vcla._id ]
+          }, {
             title: 'Loop Patterns in C Programs',
             speaker: 'Thomas Pani',
             date_from: '2014-09-03T16:00:00.000Z',
