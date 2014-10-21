@@ -1,0 +1,9 @@
+h1 {{ event.name }} 
+p {{ event.info }}
+p
+  a.label.label-default(target="_self" href="/api/calendars/{{ event.cal_pub_id }}") ICAL
+  | 
+  a.label.label-default(ui-sref="eventseries.detail({ id: event._id })") HTML
+
+hr
+div(ng-include='"app/events/eventlist.html"')

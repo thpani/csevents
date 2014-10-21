@@ -5,7 +5,7 @@ var Event = require('./event.model');
 
 // Get list of events
 exports.index = function(req, res) {
-  Event.find().populate('series').exec(function (err, events) {
+  Event.find(req.query).populate('series').exec(function (err, events) {
     if(err) { return handleError(res, err); }
     return res.json(200, events);
   });

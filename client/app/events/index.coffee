@@ -10,5 +10,3 @@ angular.module 'cseventsApp'
 
   $scope.delete = (event) ->
     Event.delete(id: event._id)
-
-  $scope.edit = (event) -> $state.go('events.edit', id: event._id)

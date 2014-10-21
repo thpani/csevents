@@ -1,0 +1,32 @@
+ul.list-group
+
+  li.list-group-item(ng-repeat='event in events')
+    .row
+      .col-sm-11
+        p
+          span.lead
+            strong {{ event.title }}
+          span(ng-show="event.speaker")= ' by '
+          span.lead
+            strong {{ event.speaker }} 
+          a(href="{{ event.speaker_url }}" ng-show="event.speaker_url")
+            i.glyphicon.glyphicon-home
+        dl.dl-horizontal
+          dt starts
+          dd {{ event.date_from | myDate }}
+          dt ends
+          dd {{ event.date_to | myDate }}
+          dt series
+          dd
+            span(ng-repeat='series in event.series')
+              a.label.label-default(ui-sref="eventseries.detail({ id: series._id })") {{ series.name }}
+              = ' '
+      .col-sm-1
+        a(ui-sref='events.edit({ id: event._id })')
+          span.glyphicon.glyphicon-pencil
+        br
+        a.trash(ng-click='delete(event)')
+          span.glyphicon.glyphicon-trash
+  
+  li.list-group-item(ng-if='events.length == 0')
+    strong Sorry, no events for you :(
